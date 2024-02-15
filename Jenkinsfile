@@ -4,9 +4,11 @@ pipeline {
       label 'nodo'
     }
   }
-  stage('Generando meta-script') {
-    steps {
-      sh 'echo hola'
+  stages {
+    stage('Generando meta-script') {
+      steps {
+        sh 'echo hola'
+      }  
     }
   }
 }

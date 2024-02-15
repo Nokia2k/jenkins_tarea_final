@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Generando meta-script') {
       steps {
-        sh 'echo hola'
+        sh 'bash /home/servidor/workspace/TareaFinal/python-diff.py users-240122.xlsx users-240123.xlsx'
       }  
     }
   }

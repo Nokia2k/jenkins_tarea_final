@@ -23,8 +23,8 @@ pipeline {
       steps {
         sh 'git config --global user.email \'vicmarmartinezmartinez@gmail.com\''
         sh 'git config --global user.name \'Nokia2k\''
-        sh 'git add meta-logs.md';
-        sh 'git commit';
+        sh 'git add meta-logs.md meta-logs.pdf';
+        sh 'git commit -m "subidos"';
         withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Nokia2k/jenkins_tarea_final.git HEAD:main')
         }

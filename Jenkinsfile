@@ -21,7 +21,11 @@ pipeline {
     } 
     stage('Enviar el md a github') {
       steps {
-        sh 'echo aqui haria el push'
+        sh 'git add meta-logs.md';
+        sh 'git commit -m "logs subidos"';
+        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+          sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Nokia2k/jenkins_tarea_final.git HEAD:main')
+        }
       }
     }
     stage('Generando el pdf con pandoc'){

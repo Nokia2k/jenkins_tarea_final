@@ -9,15 +9,14 @@ pipeline {
       steps {
         sh 'chmod 764 /home/servidor/workspace/TareaFinal/python-diff.py'
         sh 'python3 /home/servidor/workspace/TareaFinal/python-diff.py old.xlsx new.xlsx'
-        ## EN ESTE PASO NOTIFICAR VIA TELEGRAM SI TODO HA IDO BIEN
+        // EN ESTE PASO NOTIFICAR VIA TELEGRAM SI TODO HA IDO BIEN
       }  
     }
     stage('Enviar y ejecutar el meta-script') {
       steps {
-        ## AQUI HAY QUE GENERAR UN PAR DE CLAVES PUBLICAS PARA QUE NO PREGUNTE POR LA CONTRASEÑA
-        #sh 'scp -p meta-script.sh admin@172.17.0.XXX:/usr/bin/meta-script.sh'
-        #sh 'ssh admin@172.17.0.XXX meta-script.sh'
-        ## AQUI TIENE QUE HABER UN BOT QUE NOTIFIQUE POR TELEGRAM
+        sh 'scp -p meta-script.sh admin@172.17.0.4:/home/admin/meta-script.sh'
+        sh 'ssh admin@172.17.0.4 hu.sh'
+        // AQUI TIENE QUE HABER UN BOT QUE NOTIFIQUE POR TELEGRAM
       }
     } 
     stage('Enviar el md a github') {

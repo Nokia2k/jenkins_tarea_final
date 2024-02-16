@@ -28,6 +28,7 @@ pipeline {
       steps {
         sh 'pandoc -s meta-logs.md -o meta-logs.pdf --pdf-engine=wkhtmltopdf'
       }
+    }
     stage('envio de un correo de notificacion de la ejecucion') {
       steps {
         sh 'echo aqui nose como enviarlo por correo'

@@ -21,6 +21,8 @@ pipeline {
     } 
     stage('Enviar el md a github') {
       steps {
+        sh 'git config --global user.email \'vicmarmartinezmartinez@gmail.com\''
+        sh 'git config --global user.name \'Nokia2k\''
         sh 'git add meta-logs.md';
         sh 'git commit -m "logs subidos"';
         withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {

@@ -24,7 +24,7 @@ pipeline {
         sh 'git config --global user.email \'vicmarmartinezmartinez@gmail.com\''
         sh 'git config --global user.name \'Nokia2k\''
         sh 'git add meta-logs.md';
-        sh 'git commit -m "subidos"';
+        sh 'git commit -a "subidos"';
         withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           sh('git push --force https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Nokia2k/jenkins_tarea_final.git HEAD:main')
         }

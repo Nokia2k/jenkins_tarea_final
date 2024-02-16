@@ -15,7 +15,7 @@ pipeline {
     stage('Enviar y ejecutar el meta-script') {
       steps {
         sh 'scp -p meta-script.sh admin@172.17.0.4:/home/admin/meta-script.sh'
-        sh 'ssh admin@172.17.0.4 hu.sh'
+        sh 'ssh admin@172.17.0.4 ./hu.sh'
         // AQUI TIENE QUE HABER UN BOT QUE NOTIFIQUE POR TELEGRAM
       }
     } 

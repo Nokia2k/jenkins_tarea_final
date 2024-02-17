@@ -118,7 +118,7 @@ def modificaciones():
                         if vCampos[vCambiosUsuario[campoCambiado]] == "login" :
                             
                             meta_script.write("# EL LOGIN:\n")
-                            meta_script.write("usermod -l " + ws_ayer.cell(row=fila_hoy_procesada,column=2).value + " " + ws_hoy.cell(row=fila_hoy_procesada,column=2).value + "\n")
+                            meta_script.write("usermod -l " + ws_hoy.cell(row=fila_hoy_procesada,column=2).value + " " + ws_ayer.cell(row=fila_hoy_procesada,column=2).value + "\n")
                         
                             meta_logs.write("**El login de usuario**\n")
                             meta_logs.write("Codigo generado:\n" + "```bash\n")

@@ -11,6 +11,7 @@ pipeline {
         sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": " * Ejecucion de la Tarea:", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
         sh 'chmod 764 /home/servidor/workspace/TareaFinal/python-diff.py'
         sh 'python3 /home/servidor/workspace/TareaFinal/python-diff.py old.xlsx new.xlsx'
+        sh 'chmod 764 /home/servidor/workspace/TareaFinal/meta-script.sh'
         sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": "Paso 1: Ejecutando el script. -> Correcto.", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
       }  
     }

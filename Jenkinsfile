@@ -18,7 +18,7 @@ pipeline {
     stage('Enviar y ejecutar el meta-script') {
       steps {
         sh 'scp -p meta-script.sh admin@172.17.0.4:/home/admin/meta-script.sh'
-        sh 'ssh -S admin@172.17.0.4 sudo ./meta-script.sh'
+        sh 'ssh -t admin@172.17.0.4 sudo ./meta-script.sh'
         sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": "Paso 2: Enviar y ejecutar el meta-script. -> Correcto.", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
       }
     } 

@@ -53,9 +53,11 @@ pipeline {
       }
     }
     failure {
-      //Lo intenté pero no salió
-      sh 'zip -r archivos_log.zip ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}'
+      sh 'ssh jenkins@172.17.0.2 zip -r archivos_log.zip ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}'
+      sh 'scp jenkins@172.17.0.2:/var/jenkins_home/archivos_log.zip .'
       sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": " * Tarea terminada erroneamente", "disable_notification": false}\' https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
+      sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": " * Compartiendo comprimido con logs:", "disable_notification": false}\' https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
+      sh 'curl -X POST "https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendDocument" -F chat_id="1377996077" -F document="@archivos_log.zip"'  
     }
   }
 }

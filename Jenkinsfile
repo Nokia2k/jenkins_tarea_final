@@ -22,6 +22,14 @@ pipeline {
         sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": "Paso 2: Enviar y ejecutar el meta-script. -> Correcto.", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
       }
     } 
+    stage('Generando el pdf con pandoc'){
+      steps {
+        sh 'pandoc -s meta-logs.md -o meta-logs.pdf --pdf-engine=wkhtmltopdf'
+        sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": "Paso 4: Generando el pdf. -> Correcto", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
+        sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": " * Compartiendo documento PDF:", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
+        sh 'curl -X POST "https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendDocument" -F chat_id="1377996077" -F document="@meta-logs.pdf"'
+      }
+    }
     stage('Enviar el md a github') {
       steps {
         sh 'git config --global user.email \'vicmarmartinezmartinez@gmail.com\''
@@ -35,14 +43,6 @@ pipeline {
         sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": " * Compartiendo plantilla MarkDown:", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
         sh 'curl -X POST "https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendDocument" -F chat_id="1377996077" -F document="@meta-logs.md"'
 
-      }
-    }
-    stage('Generando el pdf con pandoc'){
-      steps {
-        sh 'pandoc -s meta-logs.md -o meta-logs.pdf --pdf-engine=wkhtmltopdf'
-        sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": "Paso 4: Generando el pdf. -> Correcto", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
-        sh 'curl -X POST -H \'Content-Type: application/json\' -d \'{"chat_id": "1377996077", "text": " * Compartiendo documento PDF:", "disable_notification": false}\'  https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendMessage'
-        sh 'curl -X POST "https://api.telegram.org/bot6639961602:AAFcMakUo0Q7oSCTBocZYCd6IfMWm14xFPk/sendDocument" -F chat_id="1377996077" -F document="@meta-logs.pdf"'
       }
     }
   }
